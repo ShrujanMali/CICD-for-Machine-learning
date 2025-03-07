@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import ConfusionMatrixDisplay, confusion_matrix
 import skops.io as sio
 
-drug_df = pd.read_csv(r"C:\Users\malis\OneDrive\Desktop\Shrujan\mlops\data_camp_begi_guide_to_cicd_for_ml\Data\drug.csv")
+drug_df = pd.read_csv("Data\drug.csv")
 drug_df = drug_df.sample(frac=1)
 drug_df.head(3)
 
@@ -52,18 +52,18 @@ print("Accuracy: ", str(round(accuracy, 2) * 100) + "%", "F1:", round(f1, 2))
 
 
 
-with open(r"C:\Users\malis\OneDrive\Desktop\Shrujan\mlops\data_camp_begi_guide_to_cicd_for_ml\Results\metrics.txt", "w") as outfile:
+with open("Results\metrics.txt", "w") as outfile:
     outfile.write(f"\nAccuracy = {round(accuracy, 2)}, F1 Score = {round(f1, 2)}.")
 
 
 cm = confusion_matrix(y_test, predictions, labels=pipe.classes_)
 disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=pipe.classes_)
 disp.plot()
-plt.savefig(r"C:\Users\malis\OneDrive\Desktop\Shrujan\mlops\data_camp_begi_guide_to_cicd_for_ml\Results\confusion_matrix.png", dpi=120)
+plt.savefig("Results\confusion_matrix.png", dpi=120)
 
-sio.dump(pipe, r"C:\Users\malis\OneDrive\Desktop\Shrujan\mlops\data_camp_begi_guide_to_cicd_for_ml\Model\drug_pipeline.skops")
+sio.dump(pipe, "Model\drug_pipeline.skops")
 
-file_path = r"C:\Users\malis\OneDrive\Desktop\Shrujan\mlops\data_camp_begi_guide_to_cicd_for_ml\Model\drug_pipeline.skops"
+file_path = "Model\drug_pipeline.skops"
 
 # Explicitly allow numpy.dtype as a trusted type
 trusted_types = ["numpy.dtype"]
